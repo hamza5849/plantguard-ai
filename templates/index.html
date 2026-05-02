@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantGuard AI - Plant Disease Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo">Plant<span>Guard</span> AI</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#detector">Detector</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Features</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ─── MOBILE MENU ─── -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#detector">Detector</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#features">Features</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+    <div class="hero-badge">AI Powered Detection</div>
+    <h1>Detect Plant Diseases<br><span>Instantly with AI</span></h1>
+    <p>Upload a photo of any plant leaf and our advanced AI will identify diseases in seconds, helping you protect your crops and garden.</p>
+</section>
+
+<!-- ─── STATS BAR ─── -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat">
+            <div class="stat-num">38+</div>
+            <div class="stat-lbl">Disease Types</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">14</div>
+            <div class="stat-lbl">Plant Species</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">AI</div>
+            <div class="stat-lbl">Powered</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">Free</div>
+            <div class="stat-lbl">To Use</div>
+        </div>
+    </div>
+</div>
+
+<!-- ─── DETECTOR ─── -->
+<section class="detector-section" id="detector">
+    <div class="section-label">
+        <h2>Analyze Your Plant</h2>
+        <p>Upload a clear photo of the plant leaf for best results</p>
+    </div>
+
+    <div class="card">
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" accept="image/*">
+            <div class="upload-icon-wrap">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+            </div>
+            <div class="upload-title">Drop your plant photo here</div>
+            <div class="upload-sub">or click to browse from your device</div>
+            <div class="format-tags">
+                <span class="tag">JPG</span>
+                <span class="tag">PNG</span>
+                <span class="tag">JPEG</span>
+                <span class="tag">WEBP</span>
+            </div>
+        </div>
+
+        <img id="preview" alt="Plant Preview">
+
+        <div class="btn-row">
+            <button class="btn-analyze" id="analyzeBtn" onclick="analyze()" disabled>
+                Analyze Plant Disease
+            </button>
+            <button class="btn-reset" id="resetBtn" onclick="resetAll()">
+                Reset
+            </button>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing your plant with AI...</p>
+        </div>
+
+        <div class="results" id="results">
+            <div class="results-header">Detection Results</div>
+            <div id="resultItems"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how-section" id="how-it-works">
+    <h2>How It Works</h2>
+    <p class="sub">Three simple steps to identify plant diseases</p>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <h3>Upload a Photo</h3>
+            <p>Take a clear photo of the affected plant leaf and upload it to our detector</p>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <h3>AI Analysis</h3>
+            <p>Our AI model analyzes the image and compares it against 38+ known plant diseases</p>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <h3>Get Results</h3>
+            <p>Receive instant results with confidence scores showing the most likely diseases</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="features-section" id="features">
+    <h2>Why PlantGuard AI</h2>
+    <p class="sub">Built to help farmers and gardeners protect their plants</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+            </div>
+            <h3>Instant Analysis</h3>
+            <p>Get results in seconds using our powerful AI model trained on thousands of plant images</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+            </div>
+            <h3>38+ Diseases</h3>
+            <p>Detects diseases and conditions across 14 different plant species with high accuracy</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+            </div>
+            <h3>Private and Secure</h3>
+            <p>Your images are analyzed locally and never stored or shared with anyone</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <h3>Deep Learning</h3>
+            <p>Powered by ResNet34, a state of the art deep learning architecture for image recognition</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+            </div>
+            <h3>Farmer Friendly</h3>
+            <p>Designed to be simple and easy to use for farmers, gardeners, and researchers</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+            </div>
+            <h3>Confidence Scores</h3>
+            <p>Each result comes with a confidence percentage so you know how certain the AI is</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">Plant<span>Guard</span> AI</div>
+        <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#detector">Detector</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Features</a></li>
+        </ul>
+    </div>
+    <div class="footer-copy">
+        Built with care using <strong>PyTorch and Flask</strong> &bull; PlantGuard AI &copy; 2026
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
