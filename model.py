@@ -1,8 +1,8 @@
-import torch
 import torchvision.transforms as transforms
 from torchvision import models
 from PIL import Image
 from io import BytesIO
+import torch
 
 CLASSES = [
     'Apple - Apple Scab', 'Apple - Black Rot', 'Apple - Cedar Apple Rust', 'Apple - Healthy',
@@ -21,8 +21,8 @@ CLASSES = [
 
 def load_model():
     print("Loading PlantGuard AI Model...")
-    model = models.resnet34(weights=models.ResNet34_Weights.DEFAULT)
-    model.fc = torch.nn.Linear(model.fc.in_features, len(CLASSES))
+    model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.DEFAULT)
+    model.classifier[1] = torch.nn.Linear(model.last_channel, len(CLASSES))
     model.eval()
     print("Model Ready!")
     return model
@@ -31,10 +31,7 @@ def predict(model, image_bytes):
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
-        transforms.Normalize(
-            [0.485, 0.456, 0.406],
-            [0.229, 0.224, 0.225]
-        )
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
     img = Image.open(BytesIO(image_bytes)).convert('RGB')
     tensor = transform(img).unsqueeze(0)
